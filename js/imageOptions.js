@@ -81,7 +81,7 @@
             }
             var alignment = {
                 'style.float': 'none',
-                'margin': ''
+                'style.margin': ''
             };
 
             switch (this._elements.targetSelect.selectedItem.value) {
@@ -90,7 +90,7 @@
                     break;
                 case 'left':
                     alignment['style.float'] = 'left';
-                    alignment['margin'] = '5px 20px 0 0';
+                    alignment['style.margin'] = '0 10px 10px 0';
                     this.editorKernel.relayCmd('image', alignment);
                     break;
                 case 'inherit':
@@ -99,38 +99,11 @@
                     break;
                 case 'right':
                     alignment['style.float'] = 'right';
-                    alignment['margin'] = '5px 0 20px';
+                    alignment['style.margin'] = '0 0 10px 10px';
                     this.editorKernel.relayCmd('image', alignment);
                     break;
             }
         },
-
-        /**
-         * Fetch the alignment of the selected Image
-         * @param selectedImageNode
-         * @returns {string}
-         */
-        getCurrentAlignment: function (selectedImageNode) {
-            var com = CUI.rte.Common;
-            var style = com.getAttribute(selectedImageNode, 'style');
-            if (style) {
-                if (style.indexOf('float: left') !== -1) {
-                    return 'left';
-                }
-                else if (style.indexOf('float: right') !== -1) {
-                    return 'right';
-                }
-                else if (style.indexOf('float: inherit') !== -1) {
-                    return 'inherit';
-                } else {
-                    return 'none';
-                }
-            }
-            else {
-                return 'none';
-            }
-        },
-
 
         // Override
         onShow: function () {
@@ -145,6 +118,19 @@
 
             var widthText = $(WIDTH_SEL).find('input[data-type="width"]');
             widthText.val(this.objToEdit.getAttribute('width'));
+
+            var style = this.objToEdit.getAttribute("style");
+            var alignmentOption = $(ALT_SEL).next().find('coral-select');
+
+            if (style.startsWith("float: right")) {
+                alignmentOption.val('right');
+            } else if (style.startsWith("float: left")) {
+                alignmentOption.val('left');
+            } else if (style.startsWith("float: inherit")) {
+                alignmentOption.val('inherit');
+            } else {
+                alignmentOption.val('none');
+            }
         }
     });
 
