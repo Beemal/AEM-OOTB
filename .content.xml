@@ -1,0 +1,11 @@
+ <switchTest
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/form/switch"
+                                    fieldLabel="SwitchTest"
+                                    name="./switchTest"
+                                    fieldDescription="If checked, then Dark Theme is enabled. Use for white or light backrounds."
+                                    text="Dark Theme Enabled"
+                                    value="dark"
+                                    uncheckedValue="light"
+                                    onText="Dark"
+                                    offText="light"/>
